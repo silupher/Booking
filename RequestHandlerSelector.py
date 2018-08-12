@@ -1,5 +1,4 @@
-from MyBaseRequestHandler import MyBaseRequestHandler
-from LoginRequestHandler import LoginRequestHandler
+from Handler.LoginRequestHandler import LoginRequestHandler
 from CookieUtility import CookieUtility
 from Model.CookieClass import CookieClass
 import re

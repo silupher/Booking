@@ -1,5 +1,4 @@
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from MyBaseRequestHandler import MyBaseRequestHandler
+from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
 import RequestHandlerSelector
 

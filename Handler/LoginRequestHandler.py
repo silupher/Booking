@@ -1,4 +1,4 @@
-from MyBaseRequestHandler import MyBaseRequestHandler
+from Handler.MyBaseRequestHandler import MyBaseRequestHandler
 from CookieUtility import CookieUtility
 from OperationResult import OperationResult
 from Model.CookieClass import CookieClass
