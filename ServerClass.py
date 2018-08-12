@@ -44,7 +44,10 @@ class ServerClass(BaseHTTPRequestHandler):
             result = handler.Execute()
             self.Start_Respond(result.Code, result.Body)
         except Exception as e:
-            self.Start_Error(e.args[0])
+            if len(e.args) > 1:
+                self.Start_Error(e.args[1])
+            else:
+                self.Start_Error(e.args[0])
 
 
     def do_GET(self):

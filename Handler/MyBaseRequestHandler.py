@@ -1,4 +1,5 @@
 from OperationResult import OperationResult
+import pymysql
 
 
 class MyBaseRequestHandler:
@@ -8,3 +9,7 @@ class MyBaseRequestHandler:
 
     def Execute(self):
         return OperationResult()
+
+    def GetDBConnection(self):
+        return pymysql.connect('localhost','testuser','Password01!','dbo.schema')
+

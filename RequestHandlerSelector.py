@@ -1,4 +1,5 @@
 from Handler.LoginRequestHandler import LoginRequestHandler
+from Handler.GetTeamsRequestHandler import GetTeamsRequestHandler
 from CookieUtility import CookieUtility
 from Model.CookieClass import CookieClass
 import re
@@ -13,6 +14,9 @@ def CreateRequestHandler(queryPath, method, body, cookie):
         raise Exception('no cookie for non-login operation')
 
     parsedCookie = CookieClass.FromJson(CookieUtility.ParseCookie(cookie))
+
+    if strs[0] == 'teams' and method == 'GET':
+        return GetTeamsRequestHandler(parsedCookie.User, None)
 
     raise Exception('Unsupported operation')
 
