@@ -15,7 +15,7 @@ app.controller('LoginController', function ($scope, $http) {
             window.location='index.html';
         }, function error(response)
         {
-            $scope.errorMessage =response;
+            $scope.errorMessage ='User name or password is wrong.';
         });
     }
 })

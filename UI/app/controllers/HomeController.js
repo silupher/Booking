@@ -42,11 +42,11 @@ app.controller('HomeController', function ($scope, $http) {
                 $scope.env = confResponse.data.Env;
                 $scope.loadTeamStatus();
             }, function error(confResponse) {
-                $scope.errorMessage = confResponse;
+                $scope.errorMessage = 'You don\'t have permission.';
 
             });
         }, function error(roleResponse) {
-            $scope.errorMessage = roleResponse;
+            $scope.errorMessage = 'You don\'t have permission.';
 
         });
     }
@@ -74,7 +74,7 @@ app.controller('HomeController', function ($scope, $http) {
                 })
             }
         }, function error(teamResponse) {
-            $scope.errorMessage = teamResponse;
+            $scope.errorMessage = 'You don\'t have permission.';
 
         });
     }
