@@ -2,7 +2,7 @@ app.controller('LoginController', function ($scope, $http) {
     $scope.message = 'login not called';
     $scope.user='';
     $scope.pwd='';
-
+    $scope.errorMessage ='';
     $scope.login = function(){
         $http({
             method:'post',
@@ -15,7 +15,7 @@ app.controller('LoginController', function ($scope, $http) {
             window.location='index.html';
         }, function error(response)
         {
-
+            $scope.errorMessage =response;
         });
     }
 })

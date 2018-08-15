@@ -3,7 +3,7 @@ app.controller('UpdateTicketsController', function ($scope, $http) {
     $scope.cookie = sessionStorage.getItem('cookie');
     $scope.teamName = '';
     $scope.teamTickets = '';
-
+    $scope.errorMessage ='';
     $http({
         method:'post',
         url:'http://localhost:8000/tickets',
@@ -15,7 +15,7 @@ app.controller('UpdateTicketsController', function ($scope, $http) {
         $scope.teamTickets = response.data[0].tickets;
     }, function error(response)
     {
-
+        $scope.errorMessage = response.data;
     });
 
     $scope.submit = function(){
@@ -24,11 +24,11 @@ app.controller('UpdateTicketsController', function ($scope, $http) {
             url:'http://localhost:8000/updatetickets',
             data: '{"operation":"post", "cookie":"'+$scope.cookie+'", "data":{"teamId":"'+$scope.teamId+'", "tickets":"'+$scope.teamTickets+'"}}',
             headers:{'Content-Type':'text/plain'}
-        }).then(function success(response){
+        }).then(function success(goodResponse){
             window.location='index.html';
-        }, function error(response)
+        }, function error(data)
         {
-
+            $scope.errorMessage = 'You don\'t have permission or the tickets are blocked after 5th.';
         });
     }
 })

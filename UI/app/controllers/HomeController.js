@@ -8,6 +8,7 @@ app.controller('HomeController', function ($scope, $http) {
     $scope.env = '';
     $scope.teamRecords=[];
     $scope.allowAdmin = false;
+    $scope.errorMessage ='';
     if($scope.cookie != null)
     {
         $scope.message = 'Welcome! ' + $scope.user;
@@ -41,11 +42,11 @@ app.controller('HomeController', function ($scope, $http) {
                 $scope.env = confResponse.data.Env;
                 $scope.loadTeamStatus();
             }, function error(confResponse) {
-                console.log((confResponse))
+                $scope.errorMessage = confResponse;
 
             });
         }, function error(roleResponse) {
-            console.log((roleResponse))
+            $scope.errorMessage = roleResponse;
 
         });
     }
@@ -73,7 +74,7 @@ app.controller('HomeController', function ($scope, $http) {
                 })
             }
         }, function error(teamResponse) {
-            console.log(teamResponse)
+            $scope.errorMessage = teamResponse;
 
         });
     }

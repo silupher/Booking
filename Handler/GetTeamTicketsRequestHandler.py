@@ -10,7 +10,7 @@ class GetTeamTicketsRequestHandler(MyBaseRequestHandler):
         x = self.GetDBConnection().cursor()
         data = json.loads(self.Body)['data']
         teamId=''
-        if data != None:
+        if data != '' and data['teamId'] != None:
             teamId = data['teamId']
         isProd = 1
         hardMonth=''
@@ -58,7 +58,7 @@ class GetTeamTicketsRequestHandler(MyBaseRequestHandler):
             x.execute(tickSql)
             tickRet = x.fetchall()
             output = output + '{"id":"'+str(ret[index][0])+'", "team":"' + ret[index][1] + '", "tickets":"'+str(tickRet[0][0])+'"}'
-            if index is not (len(ret) - 1):
+            if index is not (len(ret) - 1) and teamId == '':
                 output = output + ','
             index = index + 1
         output = output + ']'

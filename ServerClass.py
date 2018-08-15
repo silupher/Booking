@@ -16,10 +16,11 @@ class ServerClass(BaseHTTPRequestHandler):
 
     def Start_Error(self, err):
         self.send_response(500)
-        self.send_header('Content-Type', 'text/plain')
-        self.send_header('Content-Length', len(err))
+        self.send_header('Content-Type', 'application/json')
+        fullError = '{"error":"'+err+'"}'
+        self.send_header('Content-Length', len(fullError))
         self.end_headers()
-        self.wfile.write(bytes(err, 'utf-8'))
+        self.wfile.write(bytes(fullError, 'utf-8'))
 
     def GetPath(self):
         o = urlparse(self.path)

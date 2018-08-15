@@ -10,7 +10,8 @@ class UpdateTeamTicketsRequestHandler(MyBaseRequestHandler):
         data = json.loads(self.Body)
         teamId = data['data']['teamId']
         tickets = data['data']['tickets']
-        x = self.GetDBConnection().cursor()
+        con = self.GetDBConnection()
+        x = con.cursor()
         isProd = 1
         hardMonth=''
         sql = 'select * from `dbo.schema`.`dbo.SystemConfigurations`'
@@ -43,11 +44,15 @@ class UpdateTeamTicketsRequestHandler(MyBaseRequestHandler):
             if teamId != str(ret[index][0]):
                 index = index + 1
                 continue
-            if int(hardMonth[6:]) >= 5:
+            if int(hardMonth[6:]) > 5:
                 return OperationResult(500, 'Locked from 5th every month')
             hasPermission = 1
             break
         if hasPermission == 1:
-            sql = 'update `dbo.schema`.`dbo.Tickets` set Tickets=\''+str(tickets)+'\' where TeamId=\'' + teamId + '\' and Month=\''+hardMonth+'\''
+            sql = 'update `dbo.schema`.`dbo.Tickets` set Tickets='+str(tickets)+' where TeamId=\'' + teamId + '\' and Month=\''+hardMonth[:6]+'\''
             x.execute(sql)
-        return OperationResult(200,'')
+            ret = x.fetchall()
+            con.commit()
+            return OperationResult(200,'')
+        else:
+            return OperationResult(500, 'no permission')
