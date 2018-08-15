@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking System</title>
+    <script type="text/javascript" src="scripts/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controllers/HomeController.js"></script>
+</head>
+<body ng-app="bookingApp">
+<div ng-controller="HomeController">
+    <h2>{{message}}</h2>
+    <h2>{{userRoleMessage}}</h2>
+    <label>Current date in system is: </label>
+    <table>{{curMonth}}</table>
+    <br/>
+    <label>System environment is: </label>
+    <table>{{env}}</table>
+    <button ng-if="loggedIn" ng-click="logout()">Logout</button>
+    <table border="5px">
+        <tr>
+            <td>Team Id</td>
+            <td>Team Name</td>
+            <td>Tickets</td>
+            <td>Operation</td>
+        </tr>
+        <tr ng-repeat="x in teamRecords">
+            <td>{{x.Id}}</td>
+            <td>{{x.Name}}</td>
+            <td>{{x.Tickets}}</td>
+            <td>
+                <button ng-if="allowAdmin" ng-click="updateTickets(x.Id)">Update Tickets</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

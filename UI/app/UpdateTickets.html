@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script type="text/javascript" src="scripts/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angularjs/angular-resource.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controllers/UpdateTicketsController.js"></script>-
+</head>
+<body ng-app="bookingApp">
+<div ng-controller="UpdateTicketsController">
+<table>
+    <tr>
+        <td>
+            <label>TeamId</label>
+            <input ng-model="teamId" readonly="true"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>TeamName</label>
+            <input ng-model="teamName" readonly="true"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Tickets</label>
+            <input ng-model="teamTickets"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button ng-click="submit()">Submit</button>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

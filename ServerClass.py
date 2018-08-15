@@ -8,6 +8,7 @@ class ServerClass(BaseHTTPRequestHandler):
     def Start_Respond(self, code, body):
         self.send_response(code)
         self.send_header('Content-Type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin','*')
         self.send_header('Content-Length', len(body))
         self.send_header('X-Developer', 'Yuqing Zhao')
         self.end_headers()
@@ -42,7 +43,10 @@ class ServerClass(BaseHTTPRequestHandler):
             if handler is None:
                 raise Exception('None request handler')
             result = handler.Execute()
-            self.Start_Respond(result.Code, result.Body)
+            if result.Code == 200:
+                self.Start_Respond(result.Code, result.Body)
+            else:
+                self.Start_Error(result.Body)
         except Exception as e:
             if len(e.args) > 1:
                 self.Start_Error(e.args[1])
@@ -55,4 +59,12 @@ class ServerClass(BaseHTTPRequestHandler):
 
     def do_POST(self):
         self.Execute('POST')
+
+    # def do_OPTIONS(self):
+    #     self.send_response(200)
+    #     self.send_header('Access-Control-Allow-Methods', 'GET,PUT,POST')
+    #     self.send_header('Access-Control-Allow-Origin', '*')
+    #     self.send_header('Access-Control-Allow-Headers', 'X-Cookie')
+    #     self.send_header('Access-Control-Allow-Credentials','true')
+    #     self.end_headers()
         

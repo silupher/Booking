@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script type="text/javascript" src="scripts/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/angularjs/angular-resource.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controllers/LoginController.js"></script>-
+</head>
+<body ng-app="bookingApp">
+<div ng-controller="LoginController">
+<table>
+    <tr>
+        <td>
+            <label>UserName</label>
+            <input ng-model="user"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Password</label>
+            <input ng-model="pwd"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button ng-click="login()">Log In</button>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
